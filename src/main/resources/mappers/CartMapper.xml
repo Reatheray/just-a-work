@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ie.repository.before.CartRepository">
+    <update id="updateUpwd">
+        update busertable
+        set bpwd=#{bpwd}
+        where id = #{uid}
+    </update>
+    <update id="updateCart" parameterType="Integer">
+        update carttable
+        set shoppingnum=#{bnum}
+        where busertable_id = #{uid}
+          AND goodstable_id = #{gid}
+    </update>
+    <select id="selectCart" parameterType="Integer" resultType="map">
+        select gt.id, gt.gname, gt.gpicture, gt.grprice, ct.shoppingnum, ct.shoppingnum * gt.grprice smallsum
+        from goodstable gt,
+             carttable ct
+        where gt.id = ct.goodstable_id
+          and ct.busertable_id = #{uid}
+    </select>
+    <delete id="clear" parameterType="Integer">
+        delete
+        from carttable
+        where busertable_id = #{uid}
+    </delete>
+    <delete id="deleteAGoods" parameterType="Integer">
+        delete
+        from carttable
+        where goodstable_id = #{gid}
+          AND busertable_id = #{uid}
+    </delete>
+    <insert id="putCart" parameterType="Integer">
+        insert into carttable(id, busertable_id, goodstable_id, shoppingnum)
+        values (null, #{uid}, #{gid}, #{bnum})
+    </insert>
+    <select id="isPutCart" parameterType="Integer" resultType="map">
+        select *
+        from carttable
+        where busertable_id = #{uid}
+          AND goodstable_id = #{gid};
+    </select>
+    <select id="isFocus" parameterType="Integer" resultType="map">
+        select *
+        from focustable
+        where goodstable_id = #{gid}
+          AND busertable_id = #{uid}
+    </select>
+    <select id="myFocus" parameterType="Integer" resultType="map">
+        select *
+        from goodstable
+        where id in (select goodstable_id
+                     from focustable
+                     where busertable_id = #{uid})
+    </select>
+    <insert id="focus" parameterType="Integer">
+        insert into focustable(id, goodstable_id, busertable_id, focustime)
+        VALUES (null, #{gid}, #{uid}, null)
+    </insert>
+    <select id="myOrder" parameterType="Integer" resultType="map">
+        select *
+        from orderbasetable
+    </select>
+</mapper>
