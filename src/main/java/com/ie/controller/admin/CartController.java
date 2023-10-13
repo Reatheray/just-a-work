@@ -1,6 +1,7 @@
 package com.ie.controller.admin;
 
 import com.ie.entity.Goods;
+import com.ie.entity.Order;
 import com.ie.service.admin.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,5 +62,16 @@ public class CartController {
     @RequestMapping("/myOrder")
     public String myOrder(Model model, HttpSession session) {
         return cartService.myOrder(model, session);
+    }
+
+    @RequestMapping("/orderDetail")
+    public String orderDetail(Model model, HttpSession session, Integer id) {
+        return cartService.orderDetail(model, session, id);
+    }
+
+    @RequestMapping("/pay")
+    @ResponseBody
+    public String pay(@RequestBody Order order) {
+        return cartService.pay(order);
     }
 }

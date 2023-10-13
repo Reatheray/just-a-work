@@ -10,6 +10,11 @@
             document.getElementById("mycode").src = [[@{/validateCode}]] + "?t=" + Math.random();
         }
     </script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 <body>
 <div class="container">
     <div class="bg-primary" style="width:70%; height: 60px;padding-top: 1px;">
@@ -59,6 +64,7 @@
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-success">登录</button>
                 <button type="reset" class="btn btn-primary">重置</button>
+                <button type="button" class="btn btn-primary" onclick="goBack()">返回</button>
             </div>
         </div>
 

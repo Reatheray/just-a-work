@@ -29,4 +29,8 @@ public interface CartRepository {
     public int focus(@Param("uid") Integer uid, @Param("gid") Integer gid);
 
     public List<Map<String, Object>> myOrder(Integer uid);
+
+    public List<Map<String, Object>> orderDetail(@Param("oid") Integer oid);
+
+    public int pay(@Param("id") Integer id);
 }

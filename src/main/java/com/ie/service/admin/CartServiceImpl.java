@@ -3,6 +3,7 @@ package com.ie.service.admin;
 import com.ie.controller.admin.MD5Util;
 import com.ie.controller.admin.MyUtil;
 import com.ie.entity.Goods;
+import com.ie.entity.Order;
 import com.ie.repository.before.CartRepository;
 import com.ie.repository.before.IndexRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +95,18 @@ public class CartServiceImpl implements CartService {
         Integer uid = MyUtil.getUser(session).getId();
         model.addAttribute("myOrder", cartRepository.myOrder(uid));
         return "user/myOrder";
+    }
+
+    @Override
+    public String orderDetail(Model model, HttpSession session, Integer oid) {
+        model.addAttribute("orderDetail", cartRepository.orderDetail(oid));
+        return "user/orderDetail";
+    }
+
+    @Override
+    public String pay(Order order) {
+        cartRepository.pay(order.getId());
+        return "ok";
     }
 
 }

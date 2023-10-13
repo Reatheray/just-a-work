@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ie.service.admin.UserAndOrderAndOutService;
 
+
 @Controller
 public class UserAndOrderAndOutController extends AdminBaseController {
     @Autowired
@@ -20,7 +21,7 @@ public class UserAndOrderAndOutController extends AdminBaseController {
     @RequestMapping("/loginOut")
     public String loginOut(@ModelAttribute("aUser") AUser aUser, HttpSession session) {
         session.invalidate();
-        return "admin/login";
+        return "redirect:/";
     }
 
     @RequestMapping("/selectUser")

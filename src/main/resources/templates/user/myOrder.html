@@ -46,6 +46,24 @@
         )
             ;
         }
+
+        // function pay() {
+        //     $.ajax({
+        //         url: '@{/cart/pay}',
+        //         type: 'post',
+        //         contentType: 'application/json',
+        //         data: JSON.stringify({ id: $("#oid").text() }),
+        //         success: function(obj) {
+        //             alert("支付成功");
+        //             var pathName = window.document.location.pathname;
+        //             var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+        //             window.location.href = projectName;
+        //         },
+        //         error: function() {
+        //             alert("处理异常！");
+        //         }
+        //     });
+        // }
     </script>
 </head>
 <body>
@@ -67,7 +85,7 @@
                         <th>查看详情</th>
                     </tr>
                     <tr th:each="order:${myOrder}">
-                        <td th:text="${order.id}"></td>
+                        <td th:text="${order.id}" id="oid"></td>
                         <td th:text="${order.amount}"></td>
                         <td>
 								<span th:if="${order.status} == 0">

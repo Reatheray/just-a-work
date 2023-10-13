@@ -62,4 +62,16 @@
         select *
         from orderbasetable
     </select>
+    <select id="orderDetail" parameterType="Integer" resultType="map">
+        select *
+        from orderdetail
+                 join ebussiness.goodstable g on g.id = orderdetail.goodstable_id
+                 join ebussiness.orderbasetable o on orderdetail.orderbasetable_id = o.id
+        where orderbasetable_id = #{oid}
+    </select>
+    <update id="pay" parameterType="Integer">
+        update orderbasetable
+        set status = 1
+        where id = #{id}
+    </update>
 </mapper>

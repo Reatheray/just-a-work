@@ -7,44 +7,61 @@
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
     <script th:src="@{js/jquery.min.js}"></script>
     <script type="text/javascript" th:inline="javascript">
+        // function pay() {
+        //     $.ajax(
+        //         {
+        //             //请求路径，要注意的是url和th:inline="javascript"
+        //             url: [[@{/cart/pay
+        //         }
+        // ]],
+        //     //请求类型
+        //     type : "post",
+        //         contentType
+        // :
+        //     "application/json",
+        //         //data表示发送的数据
+        //         data
+        // :
+        //     JSON.stringify({
+        //         id: $("#oid").text()
+        //     }),
+        //         //成功响应的结果
+        //         success
+        // :
+        //
+        //     function (obj) {//obj响应数据
+        //         alert("支付成功");
+        //         //获取路径
+        //         var pathName = window.document.location.pathname;
+        //         //截取，得到项目名称
+        //         var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+        //         window.location.href = projectName;
+        //     }
+        //
+        // ,
+        //     error : function () {
+        //         alert("处理异常！");
+        //     }
+        // }
+        // )
+        //     ;
+        // }
         function pay() {
-            $.ajax(
-                {
-                    //请求路径，要注意的是url和th:inline="javascript"
-                    url: [[@{/cart/pay
+            $.ajax({
+                url: '/cart/pay',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: $("#oid").text() }),
+                success: function(obj) {
+                    alert("支付成功");
+                    var pathName = window.document.location.pathname;
+                    var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
+                    window.location.href = projectName;
+                },
+                error: function() {
+                    alert("处理异常！");
                 }
-        ]],
-            //请求类型
-            type : "post",
-                contentType
-        :
-            "application/json",
-                //data表示发送的数据
-                data
-        :
-            JSON.stringify({
-                id: $("#oid").text()
-            }),
-                //成功响应的结果
-                success
-        :
-
-            function (obj) {//obj响应数据
-                alert("支付成功");
-                //获取路径
-                var pathName = window.document.location.pathname;
-                //截取，得到项目名称
-                var projectName = pathName.substring(0, pathName.substr(1).indexOf('/') + 1);
-                window.location.href = projectName;
-            }
-
-        ,
-            error : function () {
-                alert("处理异常！");
-            }
-        }
-        )
-            ;
+            });
         }
     </script>
 </head>
