@@ -17,6 +17,6 @@ public interface GoodsService {
     public String toAddGoods(Goods goods, Model model);
 
     public String addGoods(Goods goods, HttpServletRequest request, String act) throws IllegalStateException, IOException;
-    public String updateAGoods(Goods goods);
+    public String updateAGoods(Goods goods, HttpServletRequest request) throws IOException;
 
 }

@@ -49,8 +49,8 @@ public class GoodsController {
 
 
     @RequestMapping("/updateAGoods")
-    public String updateGoods(Goods goods) {
-        return goodsService.updateAGoods(goods);
+    public String updateGoods(Goods goods, HttpServletRequest request) throws IOException {
+        return goodsService.updateAGoods(goods, request);
     }
 
 }
