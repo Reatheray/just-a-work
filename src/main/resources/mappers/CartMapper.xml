@@ -56,7 +56,7 @@
     </select>
     <insert id="focus" parameterType="Integer">
         insert into focustable(id, goodstable_id, busertable_id, focustime)
-        VALUES (null, #{gid}, #{uid}, null)
+        VALUES (null, #{gid}, #{uid}, CURRENT_TIMESTAMP)
     </insert>
     <select id="myOrder" parameterType="Integer" resultType="map">
         select *
@@ -74,4 +74,8 @@
         set status = 1
         where id = #{id}
     </update>
+    <insert id="submitOrder" parameterType="Order" useGeneratedKeys="true" keyProperty="id">
+        insert into orderbasetable
+        values (null, #{busertable_id}, #{amount}, #{status}, #{orderdate})
+    </insert>
 </mapper>

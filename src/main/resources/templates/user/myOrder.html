@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:javascript="http://www.w3.org/1999/xhtml">
 <head>
     <base th:href="@{/}"><!-- 不用base就使用th:src="@{/js/jquery.min.js} -->
     <meta charset="UTF-8">
@@ -7,7 +7,8 @@
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
     <script th:src="@{js/jquery.min.js}"></script>
     <script type="text/javascript" th:inline="javascript">
-        function pay() {
+        function pay(orderId) {
+            // console.log("orderId: " + orderId);
             $.ajax({
                 // 请求路径，要注意的是url和th:inline="javascript"
                 url: [[@{/cart/pay}]],
@@ -16,7 +17,8 @@
                 contentType: "application/json",
                 // data表示发送的数据
                 data: JSON.stringify({
-                id: $("#oid").text()
+                // id: $("#oid").text()
+                id : orderId
             }),
                 // 成功响应的结果
                 success: function (obj) {
@@ -54,12 +56,16 @@
                         <th>下单时间</th>
                         <th>查看详情</th>
                     </tr>
-                    <tr th:each="order:${myOrder}">
-                        <td th:text="${order.id}" id="oid"></td>
+<!--                    <tr th:each="order:${myOrder}">-->
+<!--                        <td th:text="${order.id}" id="oid"></td>-->
+                    <tr th:each="order, rowStat : ${myOrder}">
+                        <td th:text="${order.id}"></td>
                         <td th:text="${order.amount}"></td>
                         <td>
 								<span th:if="${order.status} == 0">
-									未支付 &nbsp; <a href="javascript:pay()">去支付</a>
+<!--									未支付 &nbsp; <a href="javascript:pay()">去支付</a>-->
+
+                                    未支付 &nbsp; <a th:attr="onclick='pay(\'' + ${order.id} + '\')'" href="#">去支付</a>
 								</span>
                             <span th:if="${order.status} == 1">
 									已支付

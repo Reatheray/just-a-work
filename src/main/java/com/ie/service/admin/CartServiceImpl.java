@@ -106,7 +106,28 @@ public class CartServiceImpl implements CartService {
     @Override
     public String pay(Order order) {
         cartRepository.pay(order.getId());
+        System.out.println(order.getId());
         return "ok";
+    }
+
+    @Override
+    public String submitOrder(Order order, HttpSession session, Double amount) {
+        Integer uid = MyUtil.getUser(session).getId();
+        order.setBusertable_id(uid);
+        order.setAmount(amount);
+        order.setStatus(0);
+        order.setOrderdate(MyUtil.getNowTime());
+        int result = cartRepository.submitOrder(order);
+        if (result > 0) {
+            cartRepository.clear(uid);
+            return "redirect:/cart/myOrder";
+        } else {
+            return "redirect:/";
+        }
+
+//        cartRepository.submitOrder(order);
+//        return "redirect:/";
+
     }
 
 }

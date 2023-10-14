@@ -1,5 +1,6 @@
 package com.ie.repository.before;
 
+import com.ie.entity.Order;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -33,4 +34,5 @@ public interface CartRepository {
     public List<Map<String, Object>> orderDetail(@Param("oid") Integer oid);
 
     public int pay(@Param("id") Integer id);
+    public int submitOrder(Order order);
 }

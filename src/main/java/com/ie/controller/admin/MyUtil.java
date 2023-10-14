@@ -1,6 +1,8 @@
 package com.ie.controller.admin;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +28,12 @@ public class MyUtil {
     public static BUser getUser(HttpSession session) {
         BUser bUser = (BUser) session.getAttribute("bUser");
         return bUser;
+    }
+
+    public static String getNowTime() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return now.format(formatter);
     }
 
 

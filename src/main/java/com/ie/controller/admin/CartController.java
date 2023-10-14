@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/cart")
-public class CartController {
+public class CartController extends BeforeBaseController {
     @Autowired
     CartService cartService;
 
@@ -73,5 +73,10 @@ public class CartController {
     @ResponseBody
     public String pay(@RequestBody Order order) {
         return cartService.pay(order);
+    }
+
+    @RequestMapping("/submitOrder")
+    public String submitOrder(Order order, HttpSession session, Double amount) {
+        return cartService.submitOrder(order, session, amount);
     }
 }

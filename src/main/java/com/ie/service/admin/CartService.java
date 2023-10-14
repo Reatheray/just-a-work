@@ -26,4 +26,6 @@ public interface CartService {
     public String orderDetail(Model model, HttpSession session, Integer oid);
 
     public String pay(Order order);
+
+    public String submitOrder(Order order, HttpSession session, Double amount);
 }
