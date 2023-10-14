@@ -16,5 +16,5 @@ If you want to use it on your machine, then you should change some settings:
 - Maven and Java settings
 
 
-The url is localhost:8080/cart
+The url is [localhost:8080/cart](http://localhost:8080/cart)
 
